@@ -1,0 +1,17 @@
+미래공대 배포 순서
+
+1. 이 폴더 안의 index.html, admin.html, app.js, config.js, vercel.json을 GitHub mirae-raid 저장소의 웹 루트에 업로드하여 덮어쓰기하세요.
+   ZIP 파일 자체를 GitHub에 업로드하면 안 됩니다.
+2. Supabase SQL Editor에서 security_patch.sql 내용을 실행하세요. 기존 schema.sql은 재실행하지 마세요.
+3. Vercel 자동 배포가 완료되면 https://mirae-raid.vercel.app 에 접속하세요.
+4. 회원가입 후 이메일 인증을 마치고 Supabase SQL Editor에서 아래 조회 SQL을 실행하세요.
+   SELECT id, nickname, role FROM public.profiles;
+5. 본인 계정의 UUID를 확인한 다음 다음 SQL의 UUID를 바꿔 실행하세요.
+   UPDATE public.profiles SET role='admin' WHERE id='본인_UUID';
+6. 다시 로그인하면 관리자 메뉴가 보입니다. 다른 브라우저에서 테스트 계정 가입 → 승인 → 공대 배정 → 참여 체크를 확인하세요.
+
+주의:
+- Supabase URL/공개용 publishable 키는 config.js에 이미 들어 있습니다.
+- secret/service_role 키는 절대 업로드하지 마세요.
+- 기존 DB의 실제 RLS 정책과 함수 동작은 여기서 직접 검증할 수 없습니다.
+- 이 패키지는 기존 서버 기능의 전부가 아니라 부분 구현입니다. 실제 운영 전 테스트가 필요합니다.
